@@ -1,6 +1,7 @@
 class Customer:
     attributes = []
-
+    low = 0
+    high = 0
     def __init__(self, details):
         a = []
         for d in details:
@@ -10,6 +11,8 @@ class Customer:
             a.append(float(d))
 
         self.attributes = a
+        self.low = 0
+        self.high = 0
 
     def __str__(self):
         line = ""

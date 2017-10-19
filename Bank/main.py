@@ -100,24 +100,47 @@ def main():
     new_low_customers = []
     new_high_customers = []
 
+    low_risk = mahalanobis_distance(new_customers[0], safe_average, safe_div, C1)
+    high_risk = mahalanobis_distance(new_customers[0], risky_average, risky_div, C2)
+
+    low_min = low_risk
+    low_max = low_risk
+    high_min = high_risk
+    high_max = high_risk
+
     for i, customer in enumerate(new_customers):
         low_risk = mahalanobis_distance(customer, safe_average, safe_div, C1)
         high_risk = mahalanobis_distance(customer, risky_average, risky_div, C2)
+
+        customer.low = low_risk
+        customer.high = high_risk
+
         if low_risk >= high_risk:
-            # print("Customer " + str(i + 1) + ": LOW     \t" + "[low = " + str(low_risk) + " , " + "high = " + str(
-            #     high_risk) + " ]")
             new_low_customers.append(customer)
         else:
-            # print("Customer " + str(i + 1) + ": HIGH     \t" + "[low = " + str(low_risk) + " , " + "high = " + str(
-            #     high_risk) + " ]")
             new_high_customers.append(customer)
 
-    print("LOW RISK CUSTOMERS -")
+        if low_min > low_risk:
+            low_min = low_risk
+
+        if low_max < low_risk:
+            low_max = low_risk
+
+        if high_min > high_risk:
+            high_min = high_risk
+
+        if high_max < high_risk:
+            high_max = high_risk
+
+    print("number of LOW risk customers:\t" + str(len(new_low_customers)))
+    print("number of HIGH risk customers:\t" + str(len(new_high_customers)))
+
+    print("LOW RISK CUSTOMERS - \tL\t\t\t\t\tH")
     for c in new_low_customers:
-        print("\t\tCustomer " + str(new_customers.index(c)))
-    print("HIGH RISK CUSTOMERS -")
+        print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
+    print("HIGH RISK CUSTOMERS - \tL\t\t\t\t\tH")
     for c in new_high_customers:
-        print("\t\tCustomer " + str(new_customers.index(c)))
+        print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
 
 
 if __name__ == '__main__':
