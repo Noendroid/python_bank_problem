@@ -132,15 +132,23 @@ def main():
         if high_max < high_risk:
             high_max = high_risk
 
-    print("number of LOW risk customers:\t" + str(len(new_low_customers)))
-    print("number of HIGH risk customers:\t" + str(len(new_high_customers)))
+    with open("output_data.TXT", "w") as output:
+        for i, c in enumerate(new_customers):
+            safe = 1
+            if c.low < c.high:
+                safe = 0
+            output.write(str(i) + "\t" + str(safe) + "\n")
+        output.write("safe" + "\t" + "1" + "\n" + "risky" + "\t" + "0")
 
-    print("LOW RISK CUSTOMERS - \tL\t\t\t\t\tH")
-    for c in new_low_customers:
-        print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
-    print("HIGH RISK CUSTOMERS - \tL\t\t\t\t\tH")
-    for c in new_high_customers:
-        print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
+        # print("number of LOW risk customers:\t" + str(len(new_low_customers)))
+        # print("number of HIGH risk customers:\t" + str(len(new_high_customers)))
+        #
+        # print("LOW RISK CUSTOMERS - \tL\t\t\t\t\tH")
+        # for c in new_low_customers:
+        #     print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
+        # print("HIGH RISK CUSTOMERS - \tL\t\t\t\t\tH")
+        # for c in new_high_customers:
+        #     print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
 
 
 if __name__ == '__main__':
