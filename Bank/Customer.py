@@ -2,6 +2,7 @@ class Customer:
     attributes = []
     low = 0
     high = 0
+
     def __init__(self, details):
         a = []
         for d in details:

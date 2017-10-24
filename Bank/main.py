@@ -53,16 +53,16 @@ def get_deviation_values(customers, average_values):
     return div
 
 
-def distribution(customer, averages, deviations):
-    for i in range(len(averages)):
-        customer.distribution.append(0)
-
-    for i in range(len(averages)):
-        part1 = (1 / (math.sqrt(2 * math.pi) * deviations[i]))
-        part2 = math.pow(math.e, -0.5 * math.pow(customer.attributes[i] - averages[i], 2))
-        d = part1 * part2
-        customer.distribution[i] = d
-    print(customer.distribution)
+# def distribution(customer, averages, deviations):
+#     for i in range(len(averages)):
+#         customer.distribution.append(0)
+#
+#     for i in range(len(averages)):
+#         part1 = (1 / (math.sqrt(2 * math.pi) * deviations[i]))
+#         part2 = math.pow(math.e, -0.5 * math.pow(customer.attributes[i] - averages[i], 2))
+#         d = part1 * part2
+#         customer.distribution[i] = d
+#     print(customer.distribution)
 
 
 def mahalanobis_distance(new_customer, average, deviation, c):
@@ -133,22 +133,22 @@ def main():
             high_max = high_risk
 
     with open("output_data.TXT", "w") as output:
+        output.write("safe" + "\t" + "1" + "\n" + "risky" + "\t" + "0"+"\n")
         for i, c in enumerate(new_customers):
             safe = 1
-            if c.low < c.high:
+            if c.low > c.high:
                 safe = 0
             output.write(str(i) + "\t" + str(safe) + "\n")
-        output.write("safe" + "\t" + "1" + "\n" + "risky" + "\t" + "0")
 
-        # print("number of LOW risk customers:\t" + str(len(new_low_customers)))
-        # print("number of HIGH risk customers:\t" + str(len(new_high_customers)))
-        #
-        # print("LOW RISK CUSTOMERS - \tL\t\t\t\t\tH")
-        # for c in new_low_customers:
-        #     print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
-        # print("HIGH RISK CUSTOMERS - \tL\t\t\t\t\tH")
-        # for c in new_high_customers:
-        #     print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
+        print("number of LOW risk customers:\t" + str(len(new_low_customers)))
+        print("number of HIGH risk customers:\t" + str(len(new_high_customers)))
+
+        print("LOW RISK CUSTOMERS - \tL\t\t\t\t\tH")
+        for c in new_low_customers:
+            print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
+        print("HIGH RISK CUSTOMERS - \tL\t\t\t\t\tH")
+        for c in new_high_customers:
+            print("\t\tCustomer " + str(new_customers.index(c)) + "\t\t" + str(c.low) + "\t" + str(c.high))
 
 
 if __name__ == '__main__':
