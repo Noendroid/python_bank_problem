@@ -30,12 +30,9 @@ def main():
         customer.high = high_risk
 
     with open("output_data_q3.TXT", "w") as output:
-        output.write("safe" + "\t" + "1" + "\n" + "risky" + "\t" + "0" + "\n")
+        output.write("interest 0 - 1 \n")
         for i, c in enumerate(new_customers):
-            safe = 1
-            if c.low > c.high:
-                safe = 0
-            output.write(str(i) + "\t" + str(safe) + "\n")
+            output.write(str(i) + "\t" + str(c.get_interest()) + "\n")
 
 
 if __name__ == '__main__':

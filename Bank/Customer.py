@@ -20,3 +20,6 @@ class Customer:
         for a in self.attributes:
             line += str(a) + "\t"
         return line
+
+    def get_interest(self):
+        return self.low / (self.low + self.high)
