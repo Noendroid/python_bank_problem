@@ -132,7 +132,7 @@ def main():
         if high_max < high_risk:
             high_max = high_risk
 
-    with open("output_data.TXT", "w") as output:
+    with open("output_data_q1.TXT", "w") as output:
         output.write("safe" + "\t" + "1" + "\n" + "risky" + "\t" + "0"+"\n")
         for i, c in enumerate(new_customers):
             safe = 1

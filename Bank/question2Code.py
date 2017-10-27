@@ -20,7 +20,7 @@ def main():
     c1 = 0.7
     c2 = 0.3
 
-    customers = get_customers_from_file("question2.TXT")
+    customers = get_customers_from_file("output_data_q2.TXT")
     for c in customers:
         print(c)
 
