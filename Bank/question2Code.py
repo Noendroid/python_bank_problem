@@ -20,7 +20,7 @@ def main():
     c1 = 0.7
     c2 = 0.3
 
-    customers = get_customers_from_file("output_data_q2.TXT")
+    customers = get_customers_from_file("customers_q2.TXT")
     for c in customers:
         print(c)
 
@@ -39,6 +39,10 @@ def main():
     else:
         print("safe customer")
 
+    with open("output_data_q2.TXT", "w") as output:
+        output.write("safe M= " + str(s_ma) + "\n")
+        output.write("risky M= " + str(r_ma))
+
 
 if __name__ == '__main__':
-    main();
+    main()
